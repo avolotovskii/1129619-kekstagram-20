@@ -102,14 +102,14 @@ var addToFragment = function (elements) {
 var showBigPhoto = function (bigPhoto) {
   bigPhoto.classList.remove('hidden');
   return bigPhoto;
-}
+};
 
 var hideCounts = function (bigPhoto) {
   var commentsCount = bigPhoto.querySelector('.social__comment-count');
   var commentsLoader = bigPhoto.querySelector('.comments-loader');
   commentsCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-}
+};
 
 var renderUserComment = function (commentData) {
   var userComment = commentTemplate.cloneNode(true);
