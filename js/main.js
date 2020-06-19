@@ -198,7 +198,7 @@ var showPhoto = function (index) {
   fillPhotoInfo(activePhoto, elementsList[index]);
 };
 
-var showPhotoClickHandler = function (evt) {
+var showPhotoClickHandler = function () {
   for (var i = 0; i <= photoCollection.length; i++) {
     showPhoto(i);
   }
