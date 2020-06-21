@@ -35,11 +35,11 @@
     effectLevel.classList.remove('hidden');
   };
 
-  var applyEffect = function (style) {
-    removeEffect();
-    showEffectLevel();
-    imgUploadPreview.classList.add(style);
-  };
+  // var applyEffect = function (style) {
+  //   removeEffect();
+  //   showEffectLevel();
+  //   imgUploadPreview.classList.add(style);
+  // };
 
   var effectClickHandler = function (evt) {
     var evtTarget = evt.target;
