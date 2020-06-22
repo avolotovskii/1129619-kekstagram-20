@@ -4,8 +4,6 @@
   var ENTER_KEY = 'Enter';
   var ESC_KEY = 'Escape';
 
-  var pageBody = document.querySelector('body');
-  // var photoCollection = document.querySelectorAll('.picture__img');
   var elementsList = window.gallery.elementsList;
   var commentsList = document.querySelector('.social__comments');
   var commentTemplate = commentsList.querySelector('.social__comment');
@@ -89,15 +87,6 @@
     document.body.classList.add('modal-open');
   };
 
-  // var showPhotoClickHandler = function () {
-  //   for (var i = 0; i <= photoCollection.length; i++) {
-  //     showPhoto(i);
-  //   }
-
-  //   closePhotoButton.addEventListener('click', closePhotoClickHandler);
-  //   document.addEventListener('keydown', closePhotoKeydownHandler);
-  // };
-
   var addCloseHandlers = function () {
     closePhotoButton.addEventListener('click', closePhotoClickHandler);
     document.addEventListener('keydown', closePhotoKeydownHandler);
@@ -111,8 +100,6 @@
     }
   };
 
-  // до этого момента все ОК
-
   var showPhotoKeydownHandler = function (evt) {
     if (evt.key === ENTER_KEY && evt.target.classList.contains('picture')) {
       evt.preventDefault();
@@ -124,8 +111,4 @@
 
   usersPhotos.addEventListener('click', showPhotoClickHandler);
   usersPhotos.addEventListener('keydown', showPhotoKeydownHandler);
-
-  window.mainPhoto = {
-    pageBody: pageBody
-  };
 })();

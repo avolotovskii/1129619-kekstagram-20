@@ -9,10 +9,11 @@
   var photoTemplate = document.querySelector('#picture')
     .content.querySelector('.picture');
 
-  var createPhotoElement = function (photo) {
+  var createPhotoElement = function (photo, index) {
     var photoElement = photoTemplate.cloneNode(true);
 
     photoElement.querySelector('.picture__img').src = photo.url;
+    photoElement.querySelector('.picture__img').dataset.index = index;
     photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
     photoElement.querySelector('.picture__likes').textContent = photo.likes;
 
@@ -22,7 +23,7 @@
   var addToFragment = function (elements) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < elements.length; i++) {
-      fragment.appendChild(createPhotoElement(elements[i]));
+      fragment.appendChild(createPhotoElement(elements[i], i));
     }
 
     return fragment;
