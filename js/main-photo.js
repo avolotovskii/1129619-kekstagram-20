@@ -112,3 +112,4 @@
   usersPhotos.addEventListener('click', showPhotoClickHandler);
   usersPhotos.addEventListener('keydown', showPhotoKeydownHandler);
 })();
+

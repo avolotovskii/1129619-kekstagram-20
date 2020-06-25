@@ -27,10 +27,6 @@
     imgUploadPreview.classList.add(style);
   };
 
-  // var hideEffectLevel = function () {
-  //   effectLevel.classList.add('hidden');
-  // };
-
   var hideEffect = function () {
     effectLevel.classList.remove('hidden');
   };
@@ -83,3 +79,4 @@
     removeEffectsHandlers: removeEffectsHandlers
   };
 })();
+
