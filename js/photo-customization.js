@@ -5,7 +5,7 @@
   var SCALE_IMAGE_DEFAULT = 100;
   var ESC_KEY = 'Escape';
 
-  var pageBody = window.mainPhoto.pageBody;
+  var pageBody = document.querySelector('body');
   var imgUploadForm = window.util.imgUploadForm;
   var imgUploadOverlay = window.util.imgUploadOverlay;
   var scaleValue = window.scale.scaleValue;

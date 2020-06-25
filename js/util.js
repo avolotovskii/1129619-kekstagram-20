@@ -20,5 +20,4 @@
     getRandomInt: getRandomInt,
     getRandomArrayElem: getRandomArrayElem
   };
-
 })();

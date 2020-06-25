@@ -31,7 +31,6 @@
     return comment;
   };
 
-
   var createCommentsArray = function () {
     var commentsAmount = getRandomInt(1, 10);
     var comments = [];
@@ -42,10 +41,10 @@
     return comments;
   };
 
-  var createPhotoDescription = function (photoIndex, description) {
+  var createPhotoDescription = function (photoIndex) {
     var photoDescription = {
       url: 'photos/' + photoIndex + '.jpg',
-      description: description,
+      description: 'Описание к картинке',
       likes: getRandomInt(15, 200),
       comments: createCommentsArray()
     };
@@ -55,8 +54,8 @@
 
   var pushElements = function (amount) {
     var elements = [];
-    for (var i = 1; i <= amount; i++) {
-      var newElement = createPhotoDescription(i, 'Здесь должно быть описание');
+    for (var i = 1; i < amount; i++) {
+      var newElement = createPhotoDescription(i + 1);
       elements.push(newElement);
     }
 

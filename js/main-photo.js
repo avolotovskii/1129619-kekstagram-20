@@ -4,8 +4,6 @@
   var ENTER_KEY = 'Enter';
   var ESC_KEY = 'Escape';
 
-  var pageBody = document.querySelector('body');
-  var photoCollection = document.querySelectorAll('.picture__img');
   var elementsList = window.gallery.elementsList;
   var commentsList = document.querySelector('.social__comments');
   var commentTemplate = commentsList.querySelector('.social__comment');
@@ -67,7 +65,7 @@
 
   var closePhoto = function () {
     bigPhotoTemplate.classList.add('hidden');
-    pageBody.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
   };
 
   var closePhotoClickHandler = function () {
@@ -82,38 +80,36 @@
     }
   };
 
-  var showPhoto = function (index) {
+  var showPhoto = function (target) {
     var activePhoto = showBigPhoto(bigPhotoTemplate);
-    pageBody.classList.add('modal-open');
-    fillPhotoInfo(activePhoto, elementsList[index]);
+    var currentIndex = parseInt(target.dataset.index, 10);
+    fillPhotoInfo(activePhoto, elementsList[currentIndex]);
+    document.body.classList.add('modal-open');
   };
 
-  var showPhotoClickHandler = function () {
-    for (var i = 0; i <= photoCollection.length; i++) {
-      showPhoto(i);
-    }
-
+  var addCloseHandlers = function () {
     closePhotoButton.addEventListener('click', closePhotoClickHandler);
     document.addEventListener('keydown', closePhotoKeydownHandler);
   };
 
+  var showPhotoClickHandler = function (evt) {
+    var evtTarget = evt.target;
+    if (evtTarget.classList.contains('picture__img')) {
+      showPhoto(evtTarget);
+      addCloseHandlers();
+    }
+  };
+
   var showPhotoKeydownHandler = function (evt) {
-    if (evt.key === ENTER_KEY) {
-      var currentPicture = evt.target.querySelector('.picture__img');
-      for (var i = 0; i < photoCollection.length; i++) {
-        if (currentPicture === photoCollection[i]) {
-          showPhoto(i);
-        }
-      }
-      closePhotoButton.addEventListener('click', closePhotoClickHandler);
-      document.addEventListener('keydown', closePhotoKeydownHandler);
+    if (evt.key === ENTER_KEY && evt.target.classList.contains('picture')) {
+      evt.preventDefault();
+      var targetImage = evt.target.querySelector('.picture__img');
+      showPhoto(targetImage);
+      addCloseHandlers();
     }
   };
 
   usersPhotos.addEventListener('click', showPhotoClickHandler);
   usersPhotos.addEventListener('keydown', showPhotoKeydownHandler);
-
-  window.mainPhoto = {
-    pageBody: pageBody
-  };
 })();
+
