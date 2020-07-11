@@ -1,16 +1,18 @@
 'use strict';
 
 (function () {
-  var imgUploadOverlay = window.util.imgUploadOverlay;
+  var imageEditor = window.util.imageEditor;
+  var imageUploadPreview = window.util.imageUploadPreview;
   var effectLevel = window.filterSlider.effectLevel;
-  var imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview img');
-  var photoEffects = document.querySelectorAll('.effects__radio');
+  var setDefaultDepthValue = window.filterSlider.setDefaultDepthValue;
+
+  var photoEffects = imageEditor.querySelectorAll('.effects__radio');
 
   var removeEffect = function () {
-    var classes = Array.from(imgUploadPreview.classList);
+    var classes = Array.from(imageUploadPreview.classList);
     for (var i = 0; i < classes.length; i++) {
       if (classes[i].match('effects__preview--')) {
-        imgUploadPreview.classList.remove(classes[i]);
+        imageUploadPreview.classList.remove(classes[i]);
       }
     }
   };
@@ -21,14 +23,15 @@
     }
   };
 
-  var applyEffect = function (style) {
-    removeEffect();
-    showEffectLevel();
-    imgUploadPreview.classList.add(style);
+  var hideEffectLevel = function () {
+    effectLevel.classList.add('hidden');
   };
 
-  var hideEffect = function () {
-    effectLevel.classList.remove('hidden');
+  var applyEffect = function (styleClass) {
+    removeEffect();
+    showEffectLevel();
+    setDefaultDepthValue();
+    imageUploadPreview.classList.add(styleClass);
   };
 
   var effectClickHandler = function (evt) {
@@ -37,10 +40,9 @@
     switch (evtTarget.id) {
       case 'effect-none':
         removeEffect();
-        hideEffect();
-        // hideEffectLevel();
-        effectLevel.classList.add('hidden');
-        imgUploadPreview.classList.add('effects__preview--none');
+        hideEffectLevel();
+        setDefaultDepthValue();
+        imageUploadPreview.classList.add('effects__preview--none');
         break;
       case 'effect-chrome':
         applyEffect('effects__preview--chrome');
@@ -57,6 +59,9 @@
       case 'effect-heat':
         applyEffect('effects__preview--heat');
         break;
+      default:
+        removeEffect();
+        hideEffectLevel();
     }
   };
 
@@ -74,9 +79,8 @@
 
   window.filter = {
     removeEffect: removeEffect,
-    // hideEffectLevel: hideEffectLevel
+    hideEffectLevel: hideEffectLevel,
     createEffectsHandlers: createEffectsHandlers,
     removeEffectsHandlers: removeEffectsHandlers
   };
 })();
-

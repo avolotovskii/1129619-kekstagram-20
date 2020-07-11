@@ -1,68 +1,41 @@
 'use strict';
 
 (function () {
-  var NAMES = [
-    'Гарри Поттер',
-    'Арнольд Шварцнегер',
-    'Дольф Лунгред',
-    'Ники Минаж',
-    'Алла Борисовна',
-    'Бродский'
-  ];
+  var loadErrorHandler = window.error.loadErrorHandler;
+  var addToFragment = window.gallery.addToFragment;
 
-  var MESSAGES = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.',
-    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];
+  var elementsList = [];
 
-  var getRandomInt = window.util.getRandomInt;
-  var getRandomArrayElem = window.util.getRandomArrayElem;
-
-  var getComments = function () {
-    var comment = {
-      avatar: 'img/avatar-' + getRandomInt(1, 6) + '.svg',
-      message: getRandomArrayElem(MESSAGES),
-      name: getRandomArrayElem(NAMES)
-    };
-    return comment;
-  };
-
-  var createCommentsArray = function () {
-    var commentsAmount = getRandomInt(1, 10);
-    var comments = [];
-    for (var i = 0; i <= commentsAmount; i++) {
-      comments.push(getComments());
-    }
-
-    return comments;
-  };
-
-  var createPhotoDescription = function (photoIndex) {
-    var photoDescription = {
-      url: 'photos/' + photoIndex + '.jpg',
-      description: 'Описание к картинке',
-      likes: getRandomInt(15, 200),
-      comments: createCommentsArray()
+  var createPictureObject = function (element, index) {
+    var pictureObject = {
+      url: element.url,
+      description: element.description,
+      likes: element.likes,
+      comments: element.comments,
+      id: index
     };
 
-    return photoDescription;
+    return pictureObject;
   };
 
-  var pushElements = function (amount) {
+  var pushElements = function (data) {
     var elements = [];
-    for (var i = 1; i < amount; i++) {
-      var newElement = createPhotoDescription(i + 1);
+    for (var i = 0; i < data.length; i++) {
+      var newElement = createPictureObject(data[i], i);
       elements.push(newElement);
     }
 
     return elements;
   };
 
-  window.data = {
-    pushElements: pushElements
+  var loadSuccessHandler = function (data) {
+    elementsList = pushElements(data);
+    addToFragment(elementsList);
+
+    window.data = {
+      elementsList: elementsList
+    };
   };
+
+  window.backend.load(loadSuccessHandler, loadErrorHandler);
 })();

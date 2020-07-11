@@ -1,57 +1,58 @@
 'use strict';
 
 (function () {
-  var SCALE_CONTROL_DEFAULT = '100%';
-  var SCALE_IMAGE_DEFAULT = 100;
+  var SCALE_CONTROL_DEFAULT_VALUE = '100%';
+  var SCALE_IMAGE_DEFAULT_VALUE = 100;
   var ESC_KEY = 'Escape';
 
-  var pageBody = document.querySelector('body');
-  var imgUploadForm = window.util.imgUploadForm;
-  var imgUploadOverlay = window.util.imgUploadOverlay;
-  var scaleValue = window.scale.scaleValue;
-  var imageScale = window.scale.imageScale;
+  var uploadForm = window.util.uploadForm;
+  var imageEditor = window.util.imageEditor;
+  var setScaleValue = window.scale.setScaleValue;
+  var setImageScale = window.scale.setImageScale;
   var removeEffect = window.filter.removeEffect;
   var hideEffectLevel = window.filter.hideEffectLevel;
-  var effectLevel = window.filterSlider.effectLevel;
+  var createEffectsHandlers = window.filter.createEffectsHandlers;
+  var removeEffectsHandlers = window.filter.removeEffectsHandlers;
+  var setDefaultDepthValue = window.filterSlider.setDefaultDepthValue;
 
-  var uploadButton = document.querySelector('#upload-file');
-  var fileUploadCancel = imgUploadForm.querySelector('#upload-cancel');
-  var textHashtags = imgUploadForm.querySelector('.text__hashtags');
-  var textDescription = imgUploadForm.querySelector('.text__description');
+  var fileUploadButton = document.querySelector('#upload-file');
+  var hashtagsInput = uploadForm.querySelector('.text__hashtags');
+  var fileUploadCancel = uploadForm.querySelector('#upload-cancel');
+  var descriptionInput = uploadForm.querySelector('.text__description');
 
-  var hideEffect = function () {
-    effectLevel.classList.remove('hidden');
-  };
-
-  var uploadButtonHandler = function () {
-    imgUploadOverlay.classList.remove('hidden');
-    pageBody.classList.add('modal-open');
-    scaleValue(SCALE_CONTROL_DEFAULT);
-    imageScale(SCALE_IMAGE_DEFAULT);
+  var uploadButtonChangeHandler = function () {
+    imageEditor.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    setScaleValue(SCALE_CONTROL_DEFAULT_VALUE);
+    setImageScale(SCALE_IMAGE_DEFAULT_VALUE);
     hideEffectLevel();
-    hideEffect();
     removeEffect();
+    setDefaultDepthValue();
+    createEffectsHandlers();
     fileUploadCancel.addEventListener('click', cancelButtonClickHandler);
     document.addEventListener('keydown', closeKeydownHandler);
   };
 
-  var cancelButtonClickHandler = function () {
-    imgUploadOverlay.classList.add('hidden');
-    pageBody.classList.remove('modal-open');
-    imgUploadForm.reset();
+  var closeImageEditor = function () {
+    removeEffectsHandlers();
+    uploadForm.reset();
+
+    imageEditor.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+
     fileUploadCancel.removeEventListener('click', cancelButtonClickHandler);
+    document.removeEventListener('keydown', closeKeydownHandler);
+  };
+
+  var cancelButtonClickHandler = function () {
+    closeImageEditor();
   };
 
   var closeKeydownHandler = function (evt) {
-    if (evt.key === ESC_KEY && textHashtags !== document.activeElement && textDescription !== document.activeElement) {
-      imgUploadForm.reset();
-      cancelButtonClickHandler();
+    if (evt.key === ESC_KEY && hashtagsInput !== document.activeElement && descriptionInput !== document.activeElement) {
+      closeImageEditor();
     }
   };
 
-  uploadButton.addEventListener('change', uploadButtonHandler);
-
-  window.photoCusomization = {
-    textHashtags: textHashtags
-  };
+  fileUploadButton.addEventListener('change', uploadButtonChangeHandler);
 })();

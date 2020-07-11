@@ -1,23 +1,28 @@
 'use strict';
 
 (function () {
-  var imgUploadForm = document.querySelector('.img-upload__form');
-  var imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
-
-  var getRandomArrayElem = function (array) {
-    return array[Math.floor(Math.random() * array.length)];
-  };
+  var uploadForm = document.querySelector('.img-upload__form');
+  var imageEditor = uploadForm.querySelector('.img-upload__overlay');
+  var imageUploadPreview = imageEditor.querySelector('.img-upload__preview img');
 
   var getRandomInt = function (min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  var getRandomArrayElement = function (array) {
+    return array[getRandomInt(0, array.length - 1)];
+  };
+
+  var getValueRange = function (value, min, max) {
+    return value * (max - min) + min;
+  };
+
   window.util = {
-    imgUploadForm: imgUploadForm,
-    imgUploadOverlay: imgUploadOverlay,
+    uploadForm: uploadForm,
+    imageEditor: imageEditor,
+    imageUploadPreview: imageUploadPreview,
     getRandomInt: getRandomInt,
-    getRandomArrayElem: getRandomArrayElem
+    getRandomArrayElement: getRandomArrayElement,
+    getValueRange: getValueRange
   };
 })();
