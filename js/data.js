@@ -39,3 +39,4 @@
 
   window.backend.load(loadSuccessHandler, loadErrorHandler);
 })();
+
