@@ -2,7 +2,10 @@
 
 (function () {
   var TIMEOUT_MS = 10000;
-  var LOAD_URL = 'https://javascript.pages.academy/kekstagram/data';
+  var Url = {
+    LOAD: 'https://javascript.pages.academy/kekstagram/data',
+    SEND: 'https://javascript.pages.academy/kekstagram'
+  };
 
   var processServerStatus = function (xhr, onLoad, onError) {
     xhr.responseType = 'json';
@@ -42,7 +45,7 @@
       onError('Произошла ошибка соединения');
     });
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      onError('Запрос не выполнился за ' + xhr.timeout + 'мс');
     });
 
     xhr.timeout = TIMEOUT_MS;
@@ -50,12 +53,21 @@
 
   var load = function (onLoad, onError) {
     var xhrLoad = new XMLHttpRequest();
-    xhrLoad.open('GET', LOAD_URL);
+    xhrLoad.open('GET', Url.LOAD);
     processServerStatus(xhrLoad, onLoad, onError);
     xhrLoad.send();
   };
 
+  var send = function (data, onLoad, onError) {
+    var xhrSend = new XMLHttpRequest();
+    xhrSend.open('POST', Url.SEND);
+    processServerStatus(xhrSend, onLoad, onError);
+    xhrSend.send(data);
+  };
+
   window.backend = {
     load: load,
+    send: send,
   };
 })();
+

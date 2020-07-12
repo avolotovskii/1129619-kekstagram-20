@@ -14,6 +14,8 @@
   var createEffectsHandlers = window.filter.createEffectsHandlers;
   var removeEffectsHandlers = window.filter.removeEffectsHandlers;
   var setDefaultDepthValue = window.filterSlider.setDefaultDepthValue;
+  var errorHandler = window.error.sendErrorHandler;
+  var successHandler = window.success.successHandler;
 
   var fileUploadButton = document.querySelector('#upload-file');
   var hashtagsInput = uploadForm.querySelector('.text__hashtags');
@@ -55,4 +57,10 @@
   };
 
   fileUploadButton.addEventListener('change', uploadButtonChangeHandler);
+
+  uploadForm.addEventListener('submit', function (evt) {
+    window.backend.send(new FormData(uploadForm), successHandler, errorHandler);
+    evt.preventDefault();
+    closeImageEditor();
+  });
 })();

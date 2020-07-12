@@ -96,4 +96,3 @@
     setDefaultDepthValue: setDefaultDepthValue
   };
 })();
-

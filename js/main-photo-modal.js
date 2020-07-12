@@ -4,7 +4,7 @@
   var ENTER_KEY = 'Enter';
   var ESC_KEY = 'Escape';
 
-  var fillPhotoInfo = window.mainPhoto.fillPictureInfo;
+  var fillPhotoInfo = window.mainPhoto.fillPhotoInfo;
 
   var bigPhotoTemplate = document.querySelector('.big-picture');
   var closePhotoButton = bigPhotoTemplate.querySelector('#picture-cancel');
@@ -30,20 +30,21 @@
     hideCounts(bigPhotoTemplate);
   };
 
-  var closePicture = function () {
+  var closePhoto = function () {
     bigPhotoTemplate.classList.add('hidden');
     document.body.classList.remove('modal-open');
+
+    closePhotoButton.removeEventListener('click', closePhotoClickHandler);
+    document.removeEventListener('keydown', closePhotoKeydownHandler);
   };
 
   var closePhotoClickHandler = function () {
-    closePicture();
-    closePhotoButton.removeEventListener('click', closePhotoClickHandler);
+    closePhoto();
   };
 
   var closePhotoKeydownHandler = function (evt) {
     if (evt.key === ESC_KEY) {
-      closePicture();
-      document.removeEventListener('keydown', closePhotoKeydownHandler);
+      closePhoto();
     }
   };
 
@@ -73,6 +74,6 @@
   photosContainer.addEventListener('keydown', showPhotoKeydownHandler);
 
   window.mainPhotoModal = {
-    showPhoto: showPhoto
+    showPPhoto: showPhoto
   };
 })();

@@ -6,8 +6,8 @@
 
   var elementsList = [];
 
-  var createPictureObject = function (element, index) {
-    var pictureObject = {
+  var createPhotoObject = function (element, index) {
+    var photoObject = {
       url: element.url,
       description: element.description,
       likes: element.likes,
@@ -15,13 +15,13 @@
       id: index
     };
 
-    return pictureObject;
+    return photoObject;
   };
 
   var pushElements = function (data) {
     var elements = [];
     for (var i = 0; i < data.length; i++) {
-      var newElement = createPictureObject(data[i], i);
+      var newElement = createPhotoObject(data[i], i);
       elements.push(newElement);
     }
 
@@ -39,3 +39,4 @@
 
   window.backend.load(loadSuccessHandler, loadErrorHandler);
 })();
+
