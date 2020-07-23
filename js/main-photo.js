@@ -5,10 +5,10 @@
 
   var commentsList = document.querySelector('.social__comments');
   var commentTemplate = commentsList.querySelector('.social__comment');
+  var commentsCount = document.querySelector('.social__comment-count');
+  var commentsLoader = document.querySelector('.comments-loader');
 
-  var hideCounts = function (bigPhoto) {
-    var commentsCount = bigPhoto.querySelector('.social__comment-count');
-    var commentsLoader = bigPhoto.querySelector('.comments-loader');
+  var hideCounts = function () {
     commentsCount.classList.add('hidden');
     commentsLoader.classList.add('hidden');
   };
@@ -25,7 +25,6 @@
 
   var createCommentsFragment = function (commentData) {
     var fragment = document.createDocumentFragment();
-
     commentData.forEach(function (item) {
       var newComment = renderUserComment(item);
       fragment.appendChild(newComment);
@@ -34,8 +33,8 @@
     return fragment;
   };
 
-  var loadComments = function (commentsData) {
-    var shownComments = commentsData.splice(0, MAX_COMMENTS_AMOUNT);
+  var loadComments = function (commentsArray) {
+    var shownComments = commentsArray.splice(0, MAX_COMMENTS_AMOUNT);
     var commentsFragment = createCommentsFragment(shownComments);
     commentsList.appendChild(commentsFragment);
   };
@@ -54,7 +53,6 @@
   };
 
   window.mainPhoto = {
-    MAX_COMMENTS_AMOUNT: MAX_COMMENTS_AMOUNT,
     fillInfo: fillPhotoInfo,
     loadComments: loadComments
   };

@@ -5,19 +5,27 @@
     ESC_KEY: 'Escape',
     ENTER_KEY: 'Enter'
   };
+  var MAX_COMMENTS_AMOUNT = 5;
 
   var fillPhotoInfo = window.mainPhoto.fillInfo;
   var loadComments = window.mainPhoto.loadComments;
+  var commentsCount = document.querySelector('.social__comment-count');
 
+  var commentsList = document.querySelector('.social__comments');
+  var commentTemplate = commentsList.querySelector('.social__comment');
   var photosContainer = document.querySelector('.pictures');
   var bigPhotoTemplate = document.querySelector('.big-picture');
   var commentsLoader = bigPhotoTemplate.querySelector('.comments-loader');
   var closePhotoButton = bigPhotoTemplate.querySelector('#picture-cancel');
   var commentsDataCopy = [];
 
+  var getCurrentCommentCount = function (comments) {
+    return comments ? comments.children.length : 0;
+  };
+
   var loaderClickHandler = function () {
     loadComments(commentsDataCopy);
-
+    commentsCount.firstChild.textContent = getCurrentCommentCount(commentTemplate) + MAX_COMMENTS_AMOUNT + 1 + ' из ';
     if (commentsDataCopy.length === 0) {
       commentsLoader.removeEventListener('click', loaderClickHandler);
       commentsLoader.classList.add('hidden');
@@ -30,14 +38,12 @@
 
     bigPhotoTemplate.classList.remove('hidden');
     commentsDataCopy = element.comments.slice();
-
     fillPhotoInfo(bigPhotoTemplate, element);
-
-    if (element.comments.length > window.mainPhoto.MAX_COMMENTS_AMOUNT) {
+    commentsCount.classList.remove('hidden');
+    if (element.comments.length > MAX_COMMENTS_AMOUNT) {
       commentsLoader.classList.remove('hidden');
       commentsLoader.addEventListener('click', loaderClickHandler);
     }
-
     loadComments(commentsDataCopy);
     document.body.classList.add('modal-open');
   };
