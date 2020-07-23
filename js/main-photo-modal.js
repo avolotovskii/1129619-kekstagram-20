@@ -12,7 +12,6 @@
   var commentsCount = document.querySelector('.social__comment-count');
 
   var commentsList = document.querySelector('.social__comments');
-  var commentTemplate = commentsList.querySelector('.social__comment');
   var photosContainer = document.querySelector('.pictures');
   var bigPhotoTemplate = document.querySelector('.big-picture');
   var commentsLoader = bigPhotoTemplate.querySelector('.comments-loader');
@@ -25,10 +24,10 @@
 
   var loaderClickHandler = function () {
     loadComments(commentsDataCopy);
-    commentsCount.firstChild.textContent = getCurrentCommentCount(commentTemplate) + MAX_COMMENTS_AMOUNT + 1 + ' из ';
+    commentsCount.firstChild.textContent = getCurrentCommentCount(commentsList) + ' из ';
     if (commentsDataCopy.length === 0) {
-      commentsLoader.removeEventListener('click', loaderClickHandler);
       commentsLoader.classList.add('hidden');
+      commentsLoader.removeEventListener('click', loaderClickHandler);
     }
   };
 
@@ -38,8 +37,10 @@
 
     bigPhotoTemplate.classList.remove('hidden');
     commentsDataCopy = element.comments.slice();
+
     fillPhotoInfo(bigPhotoTemplate, element);
     commentsCount.classList.remove('hidden');
+    commentsCount.firstChild.textContent = MAX_COMMENTS_AMOUNT + ' из ';
     if (element.comments.length > MAX_COMMENTS_AMOUNT) {
       commentsLoader.classList.remove('hidden');
       commentsLoader.addEventListener('click', loaderClickHandler);
