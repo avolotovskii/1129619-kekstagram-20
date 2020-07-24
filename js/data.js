@@ -1,9 +1,10 @@
 'use strict';
 
 (function () {
-  var loadErrorHandler = window.error.loadErrorHandler;
-  var addToFragment = window.gallery.addToFragment;
+  var errorHandler = window.error.show;
+  var addUsersPhotos = window.gallery.addUsersPhotos;
 
+  var imgFilters = document.querySelector('.img-filters');
   var elementsList = [];
 
   var createPhotoObject = function (element, index) {
@@ -19,23 +20,23 @@
   };
 
   var pushElements = function (data) {
-    var elements = [];
-    for (var i = 0; i < data.length; i++) {
-      var newElement = createPhotoObject(data[i], i);
-      elements.push(newElement);
-    }
+    var elements = data.map(function (item, index) {
+      var newElement = createPhotoObject(item, index);
+      return newElement;
+    });
 
     return elements;
   };
 
   var loadSuccessHandler = function (data) {
     elementsList = pushElements(data);
-    addToFragment(elementsList);
+    addUsersPhotos(elementsList);
+    imgFilters.classList.remove('img-filters--inactive');
 
     window.data = {
-      elementsList: elementsList
+      elementsList: elementsList,
     };
   };
 
-  window.backend.load(loadSuccessHandler, loadErrorHandler);
+  window.backend.load(loadSuccessHandler, errorHandler, 'Закрыть');
 })();

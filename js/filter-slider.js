@@ -2,12 +2,15 @@
 
 (function () {
   var DEFAULT_EFFECT_LEVEL = 100;
-  var MAX_GRAYSCALE_VALUE = 1;
-  var MAX_SEPIA_VALUE = 1;
-  var MAX_INVERT_VALUE = 100;
-  var MAX_BLUR_VALUE = 3;
+  var MaxValue = {
+    GRAYSCALE: '1',
+    SEPIA: '1',
+    INVERT: '100',
+    BLUR: '3',
+    BRIGHTNESS: '3',
+  };
+
   var MIN_BRIGHTNESS_VALUE = 1;
-  var MAX_BRIGHTNESS_VALUE = 3;
 
   var imageEditor = window.util.imageEditor;
   var imageUploadPreview = window.util.imageUploadPreview;
@@ -34,19 +37,19 @@
       if (effectClasses[i].match('effects__preview--')) {
         switch (effectClasses[i]) {
           case 'effects__preview--chrome':
-            imageUploadPreview.style.filter = 'grayscale(' + (MAX_GRAYSCALE_VALUE * proportion) + ')';
+            imageUploadPreview.style.filter = 'grayscale(' + (MaxValue.GRAYSCALE * proportion) + ')';
             break;
           case 'effects__preview--sepia':
-            imageUploadPreview.style.filter = 'sepia(' + (MAX_SEPIA_VALUE * proportion) + ')';
+            imageUploadPreview.style.filter = 'sepia(' + (MaxValue.SEPIA * proportion) + ')';
             break;
           case 'effects__preview--marvin':
-            imageUploadPreview.style.filter = 'invert(' + (MAX_INVERT_VALUE * proportion) + '%)';
+            imageUploadPreview.style.filter = 'invert(' + (MaxValue.INVERT * proportion) + '%)';
             break;
           case 'effects__preview--phobos':
-            imageUploadPreview.style.filter = 'blur(' + (MAX_BLUR_VALUE * proportion) + 'px)';
+            imageUploadPreview.style.filter = 'blur(' + (MaxValue.BLUR * proportion) + 'px)';
             break;
           case 'effects__preview--heat':
-            imageUploadPreview.style.filter = 'brightness(' + getValueRange(proportion, MIN_BRIGHTNESS_VALUE, MAX_BRIGHTNESS_VALUE) + ')';
+            imageUploadPreview.style.filter = 'brightness(' + getValueRange(proportion, MIN_BRIGHTNESS_VALUE, MaxValue.BRIGHTNESS) + ')';
             break;
           default:
             imageUploadPreview.style.filter = '';
