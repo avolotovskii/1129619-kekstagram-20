@@ -40,7 +40,11 @@
 
     fillPhotoInfo(bigPhotoTemplate, element);
     commentsCount.classList.remove('hidden');
-    commentsCount.firstChild.textContent = MAX_COMMENTS_AMOUNT + ' из ';
+    if (element.comments.length < MAX_COMMENTS_AMOUNT) {
+      commentsCount.firstChild.textContent = element.comments.length + ' из ';
+    } else {
+      commentsCount.firstChild.textContent = MAX_COMMENTS_AMOUNT + ' из ';
+    }
     if (element.comments.length > MAX_COMMENTS_AMOUNT) {
       commentsLoader.classList.remove('hidden');
       commentsLoader.addEventListener('click', loaderClickHandler);
