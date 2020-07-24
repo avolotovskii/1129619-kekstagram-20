@@ -64,8 +64,10 @@
 
     if (errors.length !== 0) {
       hashtagsInput.setCustomValidity(errors.join(' \n'));
+      hashtagsInput.style.border = '2px solid #e90000';
     } else {
       hashtagsInput.setCustomValidity('');
+      hashtagsInput.style.border = '';
     }
   };
 

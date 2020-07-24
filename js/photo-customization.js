@@ -1,8 +1,10 @@
 'use strict';
 
 (function () {
-  var SCALE_CONTROL_DEFAULT_VALUE = '100%';
-  var SCALE_IMAGE_DEFAULT_VALUE = 100;
+  var Value = {
+    SCALE_CONTROL_DEFAULT: '100%',
+    CALE_IMAGE_DEFAULT: '100'
+  };
   var ESC_KEY = 'Escape';
 
   var uploadForm = window.util.uploadForm;
@@ -25,8 +27,8 @@
   var uploadButtonChangeHandler = function () {
     imageEditor.classList.remove('hidden');
     document.body.classList.add('modal-open');
-    setScaleValue(SCALE_CONTROL_DEFAULT_VALUE);
-    setImageScale(SCALE_IMAGE_DEFAULT_VALUE);
+    setScaleValue(Value.SCALE_CONTROL_DEFAULT);
+    setImageScale(Value.SCALE_IMAGE_DEFAULT);
     hideEffectLevel();
     removeEffect();
     setDefaultDepthValue();

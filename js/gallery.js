@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var usersPictures = document.querySelector('.pictures');
+  var usersPhotos = document.querySelector('.pictures');
   var photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
   var createPictureElement = function (photo) {
@@ -15,17 +15,25 @@
     return photoElement;
   };
 
-  var addToFragment = function (photos) {
+  var addUsersPhotos = function (photos) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < photos.length; i++) {
       fragment.appendChild(createPictureElement(photos[i]));
     }
 
-    usersPictures.appendChild(fragment);
+    usersPhotos.appendChild(fragment);
+  };
+
+  var removeUsersPhotos = function () {
+    var showPhotos = usersPhotos.querySelectorAll('.picture');
+    showPhotos.forEach(function (it) {
+      usersPhotos.removeChild(it);
+    });
   };
 
   window.gallery = {
-    addToFragment: addToFragment
+    addUsersPhotos: addUsersPhotos,
+    removeUsersPhotos: removeUsersPhotos
   };
 })();
