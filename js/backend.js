@@ -2,8 +2,10 @@
 
 (function () {
   var TIMEOUT_IN_MS = 10000;
-  var LOAD_URL = 'https://javascript.pages.academy/kekstagram/data';
-  var SEND_URL = 'https://javascript.pages.academy/kekstagram';
+  var Url = {
+    LOAD: 'https://javascript.pages.academy/kekstagram/data',
+    SEND: 'https://javascript.pages.academy/kekstagram'
+  };
   var XHR_READY_STATE_READY = 4;
 
   var Code = {
@@ -69,7 +71,7 @@
     var xhrLoad = new XMLHttpRequest();
     var errorButtonText = 'Закрыть';
 
-    xhrLoad.open(RequestMethod.GET, LOAD_URL);
+    xhrLoad.open(RequestMethod.GET, Url.LOAD);
     processServerStatus(xhrLoad, onLoad, onError, errorButtonText);
     xhrLoad.send();
   };
@@ -78,7 +80,7 @@
     var xhrSend = new XMLHttpRequest();
     var errorButtonText = 'Загрузить другой файл';
 
-    xhrSend.open(RequestMethod.POST, SEND_URL);
+    xhrSend.open(RequestMethod.POST, Url.SEND);
     processServerStatus(xhrSend, onLoad, onError, errorButtonText);
     xhrSend.send(data);
   };
