@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var TIMEOUT_IN_MS = 10000;
+  var TIMEOUT_IN = 10000;
   var Url = {
     LOAD: 'https://javascript.pages.academy/kekstagram/data',
     SEND: 'https://javascript.pages.academy/kekstagram'
@@ -64,7 +64,7 @@
       onError('Запрос не выполнился за ' + xhr.timeout + 'мс', errorButtonText);
     });
 
-    xhr.timeout = TIMEOUT_IN_MS;
+    xhr.timeout = TIMEOUT_IN;
   };
 
   var load = function (onLoad, onError) {
