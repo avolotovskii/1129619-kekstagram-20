@@ -65,4 +65,8 @@
     evt.preventDefault();
     closeImageEditor();
   });
+
+  window.photoCustomization = {
+    closeImageEditor: closeImageEditor
+  };
 })();
