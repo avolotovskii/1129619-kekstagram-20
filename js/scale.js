@@ -5,9 +5,8 @@
   var SCALE_MIN_VALUE = 25;
   var SCALE_MAX_VALUE = 100;
 
-  var imageEditor = window.util.imageEditor;
-  var imageUploadPreview = window.util.imageUploadPreview;
-
+  var imageEditor = document.querySelector('.img-upload__overlay');
+  var imageUploadPreview = imageEditor.querySelector('.img-upload__preview img');
   var scaleContainer = imageEditor.querySelector('.scale');
   var buttonScaleSmaller = scaleContainer.querySelector('.scale__control--smaller');
   var buttonScaleBigger = scaleContainer.querySelector('.scale__control--bigger');

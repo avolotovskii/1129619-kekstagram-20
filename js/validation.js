@@ -5,7 +5,7 @@
   var MAX_HASHTAG_CHARACTERS = 20;
   var HASHTAG_PATTERN = /^([#]{1})([0-9a-zа-яё]{1,19})$/g;
 
-  var uploadForm = window.util.uploadForm;
+  var uploadForm = document.querySelector('.img-upload__form');
   var hashtagsInput = uploadForm.querySelector('.text__hashtags');
 
   var createHashtags = function (inputString) {

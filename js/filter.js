@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var imageEditor = window.util.imageEditor;
-  var imageUploadPreview = window.util.imageUploadPreview;
+  var imageEditor = document.querySelector('.img-upload__overlay');
+  var imageUploadPreview = imageEditor.querySelector('.img-upload__preview img');
   var effectLevel = window.filterSlider.effectLevel;
   var setDefaultDepthValue = window.filterSlider.setDefaultDepthValue;
 

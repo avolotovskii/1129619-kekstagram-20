@@ -7,8 +7,6 @@
   };
   var ESC_KEY = 'Escape';
 
-  var uploadForm = window.util.uploadForm;
-  var imageEditor = window.util.imageEditor;
   var setScaleValue = window.scale.setScaleValue;
   var setImageScale = window.scale.setImageScale;
   var removeEffect = window.filter.removeEffect;
@@ -19,6 +17,8 @@
   var errorHandler = window.error.sendErrorHandler;
   var successHandler = window.success.successHandler;
 
+  var uploadForm = document.querySelector('.img-upload__form');
+  var imageEditor = document.querySelector('.img-upload__overlay');
   var fileUploadButton = document.querySelector('#upload-file');
   var hashtagsInput = uploadForm.querySelector('.text__hashtags');
   var fileUploadCancel = uploadForm.querySelector('#upload-cancel');
@@ -65,4 +65,8 @@
     evt.preventDefault();
     closeImageEditor();
   });
+
+  window.photoCustomization = {
+    closeImageEditor: closeImageEditor
+  };
 })();

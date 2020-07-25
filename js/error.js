@@ -41,6 +41,7 @@
     var fragment = document.createDocumentFragment();
 
     errorTitle.textContent = errorMessage;
+    errorTitle.style = 'line-height: 1.5;';
 
     if (errorType) {
       errorButton.textContent = 'Закрыть';
@@ -64,8 +65,13 @@
     createErrorMessage(errorMessage, isLoadMessage);
   };
 
+  var showErrorMessage = function (errorMessage, errorButtonText) {
+    createErrorMessage(errorMessage, errorButtonText);
+  };
+
   window.error = {
     loadErrorHandler: loadErrorHandler,
-    sendErrorHandler: sendErrorHandler
+    sendErrorHandler: sendErrorHandler,
+    showErrorMessage: showErrorMessage
   };
 })();

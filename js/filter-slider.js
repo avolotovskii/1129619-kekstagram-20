@@ -12,8 +12,8 @@
 
   var MIN_BRIGHTNESS_VALUE = 1;
 
-  var imageEditor = window.util.imageEditor;
-  var imageUploadPreview = window.util.imageUploadPreview;
+  var imageEditor = document.querySelector('.img-upload__overlay');
+  var imageUploadPreview = imageEditor.querySelector('.img-upload__preview img');
   var getValueRange = window.util.getValueRange;
 
   var effectLevel = imageEditor.querySelector('.effect-level');
